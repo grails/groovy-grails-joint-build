@@ -35,7 +35,7 @@
             <classpath location="checkout/grails/lib/groovy-all-test.jar" />
         </taskdef>
         <groovy>
-            f = new File("groovy-grails-joint-build/checkout/grails/.classpath")
+            f = new File("checkout/grails/.classpath")
             text = f.text
             text = text.replaceFirst(/groovy-all-\S+?.jar/, "groovy-all-test.jar")
             f.write(text)
