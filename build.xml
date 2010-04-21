@@ -60,7 +60,7 @@
 		<mkdir dir="checkout"/>
 		<get src="http://github.com/grails/grails-core/zipball/master" dest="checkout/grails-src.zip" verbose="true"/>
 		<unzip src="checkout/grails-src.zip" dest="checkout">
-			<mapper type="regexp" from="(grails-grails-core-[\w]*/)(.*)" to="grails/\2"/>
+        	<mapper type="regexp" from="(grails-grails-core-\S*?/)(.*)" to="grails/\2"/>
 		</unzip>
 	</target>
 </project>
