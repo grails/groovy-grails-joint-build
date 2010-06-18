@@ -42,14 +42,24 @@
         </groovy>
     </target>
     <target name="test-grails">
-        <ant dir="checkout/grails" antfile="build.xml" target="clean" />
-        <exec dir="checkout/grails" executable="${env.ANT_HOME}/bin/ant" failonerror="true" osfamily="unix">
+	    <exec dir="checkout/grails" executable="./gradlew" failonerror="true" osfamily="unix">
+            <arg value="-Dgroovy.grails.joint=true"/>
+            <arg value="clean"/>
+        </exec>
+        <exec dir="checkout/grails" command="cmd" failonerror="true" osfamily="windows">
+            <arg value="/c"/>
+            <arg value="gradlew.bat"/>
+            <arg value="-Dgroovy.grails.joint=true"/>
+            <arg value="clean"/>
+        </exec>
+
+        <exec dir="checkout/grails" executable="./gradlew" failonerror="true" osfamily="unix">
             <arg value="-Dgroovy.grails.joint=true"/>
             <arg value="test"/>
         </exec>
         <exec dir="checkout/grails" command="cmd" failonerror="true" osfamily="windows">
             <arg value="/c"/>
-            <arg value="ant.bat"/>
+            <arg value="gradlew.bat"/>
             <arg value="-Dgroovy.grails.joint=true"/>
             <arg value="test"/>
         </exec>
