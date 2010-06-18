@@ -42,6 +42,7 @@
         </groovy>
     </target>
     <target name="test-grails">
+	    <chmod file="checkout/grails/gradlew" perm="+x"/>
 	    <exec dir="checkout/grails" executable="./gradlew" failonerror="true" osfamily="unix">
             <arg value="-Dgroovy.grails.joint=true"/>
             <arg value="clean"/>
