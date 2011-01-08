@@ -47,7 +47,7 @@
             <arg value="-Dgroovy.grails.joint=true"/>
             <arg value="clean"/>
         </exec>
-        <exec dir="checkout/grails" command="cmd" failonerror="true" osfamily="windows">
+        <exec dir="checkout/grails" executable="cmd" failonerror="true" osfamily="windows">
             <arg value="/c"/>
             <arg value="gradlew.bat"/>
             <arg value="-Dgroovy.grails.joint=true"/>
@@ -58,7 +58,7 @@
             <arg value="-Dgroovy.grails.joint=true"/>
             <arg value="test"/>
         </exec>
-        <exec dir="checkout/grails" command="cmd" failonerror="true" osfamily="windows">
+        <exec dir="checkout/grails" executable="cmd" failonerror="true" osfamily="windows">
             <arg value="/c"/>
             <arg value="gradlew.bat"/>
             <arg value="-Dgroovy.grails.joint=true"/>
