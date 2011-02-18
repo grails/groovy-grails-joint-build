@@ -13,34 +13,6 @@
         </ant>
     </target>
 
-    <target name="replace-jar">
-        <delete>
-            <fileset dir="checkout/grails/lib" includes="groovy-all-*.jar" />
-        </delete>
-        <copy todir="checkout/grails/lib">
-            <fileset dir="${groovy.checkout.dir}/target/dist">
-                <include name="groovy-all-*.jar" />
-                <exclude name="groovy-all-*-sources.jar" />
-                <exclude name="groovy-all-minimal-*.jar" />
-            </fileset>
-        </copy>
-
-
-        <move tofile="checkout/grails/lib/groovy-all-test.jar">
-            <fileset dir="${groovy.checkout.dir}/target/dist" includes="groovy-all-*.jar" excludes="groovy-all-*-sources.jar, groovy-all-minimal-*.jar"/>
-        </move>
-
-        <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy">
-
-            <classpath location="checkout/grails/lib/groovy-all-test.jar" />
-        </taskdef>
-        <groovy>
-            f = new File("checkout/grails/.classpath")
-            text = f.text
-            text = text.replaceFirst(/groovy-all-\S+?.jar/, "groovy-all-test.jar")
-            f.write(text)
-        </groovy>
-    </target>
     <target name="test-grails">
 	    <chmod file="checkout/grails/gradlew" perm="+x"/>
 	    <exec dir="checkout/grails" executable="./gradlew" failonerror="true" osfamily="unix">
@@ -56,16 +28,18 @@
 
         <exec dir="checkout/grails" executable="./gradlew" failonerror="true" osfamily="unix">
             <arg value="-Dgroovy.grails.joint=true"/>
+            <arg value="-Dgroovy.jar=../../../target/dist/groovy-all-1.8.0-RC-1-SNAPSHOT.jar"/>
             <arg value="test"/>
         </exec>
         <exec dir="checkout/grails" executable="cmd" failonerror="true" osfamily="windows">
             <arg value="/c"/>
             <arg value="gradlew.bat"/>
             <arg value="-Dgroovy.grails.joint=true"/>
+            <arg value="-Dgroovy.jar=../../../target/dist/groovy-all-1.8.0-RC-1-SNAPSHOT.jar"/>
             <arg value="test"/>
         </exec>
     </target>
-    <target name="build" depends="build-groovy, get-grails, replace-jar, test-grails" />
+    <target name="build" depends="build-groovy, get-grails, test-grails" />
 
 	<target name="get-grails">
 		<mkdir dir="checkout"/>
