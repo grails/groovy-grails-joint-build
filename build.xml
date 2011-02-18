@@ -28,14 +28,14 @@
 
         <exec dir="checkout/grails" executable="./gradlew" failonerror="true" osfamily="unix">
             <arg value="-Dgroovy.grails.joint=true"/>
-            <arg value="-Dgroovy.jar=../../../target/dist/groovy-all-1.8.0-RC-1-SNAPSHOT.jar"/>
+            <arg value="-Dgroovy.jar=../../../GROOVY_1_8_X/target/dist/groovy-all-1.8.0-RC-1-SNAPSHOT.jar"/>
             <arg value="test"/>
         </exec>
         <exec dir="checkout/grails" executable="cmd" failonerror="true" osfamily="windows">
             <arg value="/c"/>
             <arg value="gradlew.bat"/>
             <arg value="-Dgroovy.grails.joint=true"/>
-            <arg value="-Dgroovy.jar=../../../target/dist/groovy-all-1.8.0-RC-1-SNAPSHOT.jar"/>
+            <arg value="-Dgroovy.jar=../../../GROOVY_1_8_X/target/dist/groovy-all-1.8.0-RC-1-SNAPSHOT.jar"/>
             <arg value="test"/>
         </exec>
     </target>
