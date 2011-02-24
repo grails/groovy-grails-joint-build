@@ -1,0 +1,38 @@
+apply plugin: 'java'
+
+defaultTasks 'jointBuild'
+
+groovyCheckoutDir = '../GROOVY_1_8_X'
+githubCheckoutDir = 'githubCheckout'
+grailsCheckoutDir = "${githubCheckoutDir}/grails"
+
+task buildGroovy << {
+    ant.ant(dir: groovyCheckoutDir, antfile: 'build.xml', target: 'clean')
+    ant.ant(dir: groovyCheckoutDir, antfile: 'build.xml', target: 'install') {
+        property name: 'skipTests', value: true
+        property name: 'skipExamples', value: true
+    }
+}
+
+task testGrails(type: GradleBuild){
+    groovyJarPath = new File(groovyCheckoutDir, 'target/dist/groovy-all-1.8.0-rc-2-SNAPSHOT.jar')
+    dir = grailsCheckoutDir
+    startParameter.systemPropertiesArgs = ['groovy.jar': groovyJarPath.absolutePath, 'groovy.grails.joint': 'true']
+    tasks = ['clean', 'libs']
+}
+
+task getGrails << {
+    ant {
+        mkdir dir: githubCheckoutDir
+        get src:"http://nodeload.github.com/grails/grails-core/zipball/master", dest:"${githubCheckoutDir}/grails-core-src.zip", verbose:"true"
+        unzip(src: "${githubCheckoutDir}/grails-core-src.zip", dest: githubCheckoutDir) {
+            mapper type: 'regexp', from:/(grails-grails-core-[\w]*\/)(.*)/, to:/grails\/\2/
+        }
+    }
+}
+
+clean {
+    delete githubCheckoutDir
+}
+
+task jointBuild(dependsOn: ['getGrails', 'buildGroovy', 'testGrails'])
