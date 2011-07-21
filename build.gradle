@@ -2,7 +2,7 @@ apply plugin: 'java'
 
 defaultTasks 'jointBuild'
 
-groovyCheckoutDir = '../GROOVY_1_8_X'
+groovyCheckoutDir = '../../GROOVY_1_8_X'
 githubCheckoutDir = 'githubCheckout'
 grailsCheckoutDir = "${githubCheckoutDir}/grails"
 
@@ -15,10 +15,10 @@ task buildGroovy << {
 }
 
 task testGrails(type: GradleBuild){
-    groovyJarPath = new File(groovyCheckoutDir, 'target/dist/groovy-all-1.8.0-rc-2-SNAPSHOT.jar')
+    groovyJarPath = new File(groovyCheckoutDir, 'target/dist/groovy-all-1.8.2-SNAPSHOT.jar')
     dir = grailsCheckoutDir
     startParameter.systemPropertiesArgs = ['groovy.jar': groovyJarPath.absolutePath, 'groovy.grails.joint': 'true']
-    tasks = ['clean', 'libs']
+    tasks = ['clean', 'test']
 }
 
 task getGrails << {
