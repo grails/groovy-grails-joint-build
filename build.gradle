@@ -12,7 +12,7 @@ task cleanGroovy << {
 
 task buildGroovy(dependsOn: 'cleanGroovy', type:Exec) {
     workingDir groovyCheckoutDir
-    commandLine 'ant', 'install', '-DskipTests=true', '-DskipExamples=true'
+    commandLine '/opt/java/tools/ant/current/bin/ant', 'install', '-DskipTests=true', '-DskipExamples=true'
 }
 
 task testGrails(type: GradleBuild){
