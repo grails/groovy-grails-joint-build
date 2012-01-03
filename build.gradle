@@ -12,7 +12,11 @@ task cleanGroovy << {
 
 task buildGroovy(dependsOn: 'cleanGroovy', type:Exec) {
     workingDir groovyCheckoutDir
-    commandLine '/opt/java/tools/ant/current/bin/ant', 'install', '-DskipTests=true', '-DskipExamples=true'
+
+    def antHome = System.properties['ant.home']
+    def antCommand = antHome ? "${antHome}/bin/ant" : 'ant'
+
+    commandLine antCommand, 'install', '-DskipTests=true', '-DskipExamples=true'
 }
 
 task testGrails(type: GradleBuild){
