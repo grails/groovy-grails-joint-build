@@ -6,17 +6,13 @@ groovyCheckoutDir = '../GROOVY_1_8_X'
 githubCheckoutDir = 'githubCheckout'
 grailsCheckoutDir = "${githubCheckoutDir}/grails"
 
-task cleanGroovy << {
-    ant.ant(dir: groovyCheckoutDir, antfile: 'build.xml', target: 'clean')
-}
-
-task buildGroovy(dependsOn: 'cleanGroovy', type:Exec) {
+task buildGroovy(type:Exec) {
     workingDir groovyCheckoutDir
 
     def antHome = System.properties['ant.home']
     def antCommand = antHome ? "${antHome}/bin/ant" : 'ant'
 
-    commandLine antCommand, 'install', '-DskipTests=true', '-DskipExamples=true'
+    commandLine antCommand, 'clean', 'install', '-DskipTests=true', '-DskipExamples=true'
 }
 
 task testGrails(type: GradleBuild){
