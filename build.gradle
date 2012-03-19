@@ -19,6 +19,7 @@ task testGrails(type: GradleBuild){
     groovyJarPath = new File(groovyCheckoutDir, 'target/dist/groovy-all-1.8.7-SNAPSHOT.jar')
     dir = grailsCheckoutDir
     startParameter.systemPropertiesArgs = ['groovy.jar': groovyJarPath.absolutePath, 'groovy.grails.joint': 'true']
+    startParameter.excludedTaskNames = ['signArchives']
     tasks = ['clean', 'install', 'test']
 }
 
