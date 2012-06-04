@@ -2,7 +2,7 @@ apply plugin: 'java'
 
 defaultTasks 'jointBuild'
 
-groovyCheckoutDir = '../GROOVY_1_8_X'
+groovyCheckoutDir = '../GROOVY_2_0_X'
 githubCheckoutDir = 'githubCheckout'
 grailsCheckoutDir = "${githubCheckoutDir}/grails"
 
