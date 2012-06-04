@@ -8,7 +8,7 @@ grailsCheckoutDir = "${githubCheckoutDir}/grails"
 
 task buildGroovy(type: GradleBuild) {
     dir = groovyCheckoutDir
-    startParameter.systemPropertiesArgs = ['skipExamples', 'true', 'skipTests': 'true']
+    startParameter.systemPropertiesArgs = ['skipExamples': 'true', 'skipTests': 'true']
     tasks = ['clean', 'install']
 }
 
