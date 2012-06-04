@@ -6,17 +6,14 @@ groovyCheckoutDir = '../GROOVY_2_0_X'
 githubCheckoutDir = 'githubCheckout'
 grailsCheckoutDir = "${githubCheckoutDir}/grails"
 
-task buildGroovy(type:Exec) {
-    workingDir groovyCheckoutDir
-
-    def antHome = System.properties['ant.home']
-    def antCommand = antHome ? "${antHome}/bin/ant" : 'ant'
-
-    commandLine antCommand, 'clean', 'install', '-DskipTests=true', '-DskipExamples=true'
+task buildGroovy(type: GradleBuild) {
+    dir = groovyCheckoutDir
+    startParameter.systemPropertiesArgs = ['skipExamples', 'true', 'skipTests': 'true']
+    tasks = ['clean', 'install']
 }
 
 task testGrails(type: GradleBuild){
-    groovyJarPath = new File(groovyCheckoutDir, 'target/dist/groovy-all-1.8.7-SNAPSHOT.jar')
+    groovyJarPath = new File(groovyCheckoutDir, 'target/libs/groovy-all-2.0.0-rc-2-SNAPSHOT.jar')
     dir = grailsCheckoutDir
     startParameter.systemPropertiesArgs = ['groovy.jar': groovyJarPath.absolutePath, 'groovy.grails.joint': 'true']
     startParameter.excludedTaskNames = ['signArchives']
