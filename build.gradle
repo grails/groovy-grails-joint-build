@@ -9,7 +9,7 @@ ext.grailsCheckoutDir = "${githubCheckoutDir}/grails"
 task buildGroovy(type: GradleBuild) {
     dir = groovyCheckoutDir
     startParameter.systemPropertiesArgs = ['skipExamples': 'true', 'skipTests': 'true']
-    tasks = ['clean', 'install']
+    tasks = ['clean', 'jarAll']
 }
 
 task testGrails(type: GradleBuild){
