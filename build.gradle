@@ -17,7 +17,6 @@ task testGrails(type: GradleBuild){
     dir = grailsCheckoutDir
     startParameter.systemPropertiesArgs = ['groovy.jar': groovyJarPath.absolutePath, 'groovy.grails.joint': 'true']
     tasks = ['clean', 'install', 'test']
-    startParameter.excludedTaskNames = ['javadoc']
 }
 
 task getGrails << {
