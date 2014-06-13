@@ -22,9 +22,9 @@ task testGrails(type: GradleBuild){
 task getGrails << {
     ant {
         mkdir dir: githubCheckoutDir
-        get src:"http://github.com/grails/grails-core/archive/groovy_2.3_jdk8.zip", dest:"${githubCheckoutDir}/grails-core-src.zip", verbose:"true"
+        get src:"http://github.com/grails/grails-core/archive/groovy_2.4.zip", dest:"${githubCheckoutDir}/grails-core-src.zip", verbose:"true"
         unzip(src: "${githubCheckoutDir}/grails-core-src.zip", dest: githubCheckoutDir) {
-            mapper type: 'regexp', from:/(grails-core-groovy_2.3_jdk8[\w]*\/)(.*)/, to:/grails\/\2/
+            mapper type: 'regexp', from:/(grails-core-groovy_2.4[\w]*\/)(.*)/, to:/grails\/\2/
         }
     }
 }
