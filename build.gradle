@@ -13,7 +13,12 @@ task buildGroovy(type: GradleBuild) {
 }
 
 task testGrails(type: GradleBuild){
-    ext.groovyJarPath = new File(groovyCheckoutDir, 'target/libs/groovy-all-2.3.4-SNAPSHOT.jar')
+    if(project.hasProperty('groovy.version')) {
+        ext.groovyVersion = project.getProperty('groovy.version')
+    } else {
+        ext.groovyVersion = '2.3.4-SNAPSHOT'
+    }
+    ext.groovyJarPath = new File(groovyCheckoutDir, "target/libs/groovy-all-${groovyVersion}.jar")
     dir = grailsCheckoutDir
     startParameter.systemPropertiesArgs = ['groovy.jar': groovyJarPath.absolutePath, 'groovy.grails.joint': 'true']
     tasks = ['clean', 'populateDependencies', 'test']
