@@ -6,17 +6,17 @@ ext.groovyCheckoutDir = '../groovy_checkout'
 ext.githubCheckoutDir = 'githubCheckout'
 ext.grailsCheckoutDir = "${githubCheckoutDir}/grails"
 
-task buildGroovy(type: GradleBuild) {
-    dir = groovyCheckoutDir
-    startParameter.systemPropertiesArgs = ['skipExamples': 'true', 'skipTests': 'true']
-    tasks = ['clean', 'jarAll']
+task buildGroovy(type: Exec) {
+    ext.tasks = ['clean', 'jarAll']
+    workingDir = groovyCheckoutDir
+    commandLine = ['./gradlew', *tasks, '-DskipExamples=true', '-DskipTests=true']
 }
 
 task testGrails(type: GradleBuild){
     if(project.hasProperty('groovy.version')) {
         ext.groovyVersion = project.getProperty('groovy.version')
     } else {
-        ext.groovyVersion = '2.3.4-SNAPSHOT'
+        ext.groovyVersion = '2.3.5-SNAPSHOT'
     }
     ext.groovyJarPath = new File(groovyCheckoutDir, "target/libs/groovy-all-${groovyVersion}.jar")
     dir = grailsCheckoutDir
