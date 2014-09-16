@@ -16,7 +16,7 @@ task testGrails(type: GradleBuild){
     if(project.hasProperty('groovy.version')) {
         ext.groovyVersion = project.getProperty('groovy.version')
     } else {
-        ext.groovyVersion = '2.3.5-SNAPSHOT'
+        ext.groovyVersion = '2.3.7-SNAPSHOT'
     }
     ext.groovyJarPath = new File(groovyCheckoutDir, "target/libs/groovy-all-${groovyVersion}.jar")
     dir = grailsCheckoutDir
