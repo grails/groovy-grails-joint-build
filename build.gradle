@@ -27,7 +27,7 @@ task testGrails(type: GradleBuild){
 task getGrails << {
     ant {
         mkdir dir: githubCheckoutDir
-        get src:"http://github.com/grails/grails-core/zipball/2.5.x", dest:"${githubCheckoutDir}/grails-core-src.zip", verbose:"true"
+        get src:"http://github.com/grails/grails-core/zipball/master", dest:"${githubCheckoutDir}/grails-core-src.zip", verbose:"true"
         unzip(src: "${githubCheckoutDir}/grails-core-src.zip", dest: githubCheckoutDir) {
             mapper type: 'regexp', from:/(grails-core-[\w]*\/)(.*)/, to:/grails\/\2/
         }
